@@ -110,6 +110,7 @@ SELECT * FROM DimCustomer;
 SELECT * FROM DimProduct;
 SELECT * FROM DimSalesperson;
 SELECT * FROM DimDate;
+GO
 
 CREATE PROCEDURE sp_InsertDateDimension
     @DateValue DATE
@@ -129,6 +130,7 @@ END;
 PRINT 'Test: Insert Date Dimension';
 EXEC sp_InsertDateDimension @DateValue = '2024-01-01';
 SELECT * FROM DimDate WHERE FullDate = '2024-01-01';
+GO
 
 CREATE PROCEDURE sp_CompellingQuery AS
 BEGIN
@@ -164,6 +166,7 @@ CREATE TABLE StageCustomer (
     StateProvince NVARCHAR(255),
     Country NVARCHAR(255)
 );
+GO
 
 CREATE OR ALTER PROCEDURE sp_ExtractCustomerData AS
 BEGIN
@@ -188,6 +191,7 @@ END;
 PRINT 'Test: Extract Customer Data';
 EXEC sp_ExtractCustomerData;
 SELECT * FROM StageCustomer;
+GO
 
 CREATE PROCEDURE sp_TransformCustomerData AS
 BEGIN
@@ -205,6 +209,7 @@ END;
 PRINT 'Test: Transform Customer Data';
 EXEC sp_TransformCustomerData;
 SELECT * FROM DimCustomer;
+GO
 
 CREATE PROCEDURE sp_LoadCustomerDimension AS
 BEGIN
@@ -236,5 +241,3 @@ END;
 -- TEST: Run Compelling Query
 PRINT 'Test: Query After ETL';
 EXEC sp_CompellingQuery;
-
-
