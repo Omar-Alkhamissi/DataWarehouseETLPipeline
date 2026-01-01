@@ -1,5 +1,3 @@
--- Requirement 1: Create Dimensional Model Tables
-
 CREATE TABLE DimProduct (
     ProductKey INT IDENTITY PRIMARY KEY,
     ProductName NVARCHAR(255),
@@ -100,9 +98,6 @@ VALUES
 ('2024-01-02', 'Tuesday', 'January', 2024, 0),
 ('2024-01-03', 'Wednesday', 'January', 2024, 0);
 
-
-
-
 -- Populate FactSales
 INSERT INTO FactSales (ProductKey, CustomerKey, SupplierKey, SalespersonKey, DateKey, Quantity, TotalAmount)
 VALUES 
@@ -116,9 +111,6 @@ SELECT * FROM DimProduct;
 SELECT * FROM DimSalesperson;
 SELECT * FROM DimDate;
 
-
-
--- Requirement 2: Date Dimension Stored Procedure
 CREATE PROCEDURE sp_InsertDateDimension
     @DateValue DATE
 AS
@@ -138,7 +130,6 @@ PRINT 'Test: Insert Date Dimension';
 EXEC sp_InsertDateDimension @DateValue = '2024-01-01';
 SELECT * FROM DimDate WHERE FullDate = '2024-01-01';
 
--- Requirement 3: Compelling Warehouse Query
 CREATE PROCEDURE sp_CompellingQuery AS
 BEGIN
     SELECT
@@ -166,7 +157,6 @@ END;
 PRINT 'Test: Compelling Query';
 EXEC sp_CompellingQuery;
 
--- Requirement 4: Extract Customer Data
 CREATE TABLE StageCustomer (
     CustomerKey INT,
     CustomerName NVARCHAR(255),
@@ -199,7 +189,6 @@ PRINT 'Test: Extract Customer Data';
 EXEC sp_ExtractCustomerData;
 SELECT * FROM StageCustomer;
 
--- Requirement 5: Transform Customer Data
 CREATE PROCEDURE sp_TransformCustomerData AS
 BEGIN
     MERGE DimCustomer AS Target
@@ -217,7 +206,6 @@ PRINT 'Test: Transform Customer Data';
 EXEC sp_TransformCustomerData;
 SELECT * FROM DimCustomer;
 
--- Requirement 6: ETL Load for Customer Dimension
 CREATE PROCEDURE sp_LoadCustomerDimension AS
 BEGIN
     BEGIN TRANSACTION;
@@ -237,7 +225,6 @@ PRINT 'Test: Load Customer Dimension';
 EXEC sp_LoadCustomerDimension;
 SELECT * FROM DimCustomer;
 
--- Requirement 7: Load Fact Table and Query
 DECLARE @OrderDate DATE = '2013-01-01';
 WHILE @OrderDate <= '2013-01-04'
 BEGIN
